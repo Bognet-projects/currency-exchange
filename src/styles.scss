@@ -1,1 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+//Custom moccasin color palette
+$dark-moccasin-text: rgba(black, 0.87);
+$light-moccasin-text: white;
+$moccasin-palette: (
+  50: #fff3e4,
+  100: #ffe1bc,
+  200: #ffcd8e,
+  300: #ffb85e,
+  400: #ffa83e,
+  500: #ff992a,
+  600: #ff8d29,
+  700: #fa7e27,
+  800: #f46e24,
+  900: #ea5421,
+  contrast: (
+    50: $dark-moccasin-text,
+    100: $dark-moccasin-text,
+    200: $dark-moccasin-text,
+    300: $dark-moccasin-text,
+    400: $dark-moccasin-text,
+    500: $light-moccasin-text,
+    600: $light-moccasin-text,
+    700: $light-moccasin-text,
+    800: $light-moccasin-text,
+    900: $light-moccasin-text
+  )
+);
+
+//Custom colors
+$currency-exchange-primary: mat.define-palette(mat.$teal-palette);
+$currency-exchange-accent: mat.define-palette($moccasin-palette);
+$currency-exchange-warn: mat.define-palette(mat.$red-palette);
+
+//Custom theme (dark)
+$currency-exchange-theme: mat.define-dark-theme((
+  color: (
+    primary: $currency-exchange-primary,
+    accent: $currency-exchange-accent,
+    warn: $currency-exchange-warn,
+  )
+));
+
+@include mat.all-component-themes($currency-exchange-theme);
+
+//Default styles
+html, body{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #333;
+}
