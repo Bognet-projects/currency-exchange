@@ -1,0 +1,23 @@
+div.container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  &.baseline{
+    align-items: baseline;
+  }
+}
+button{
+  width: 200px;
+  height: 55px;
+}
+mat-icon{
+  margin: 0 10px;
+  cursor: pointer;
+}
+input#amount{
+  text-align: right;
+  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
+    display: none;
+  }
+}
