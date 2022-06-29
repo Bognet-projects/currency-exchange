@@ -3,14 +3,14 @@
     <mat-form-field appearance="outline">
       <mat-label>From</mat-label>
       <mat-select [(ngModel)]="fromValue">
-        <mat-option *ngFor="let symbol of symbols" value="{{symbol}}">{{symbol}}</mat-option>
+        <mat-option *ngFor="let symbol of symbols" value="{{symbol.code}}">{{symbol.code}} - {{symbol.description}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-icon (click)="onSwitch()">compare_arrows</mat-icon>
     <mat-form-field appearance="outline">
       <mat-label>To</mat-label>
       <mat-select [(ngModel)]="toValue">
-        <mat-option *ngFor="let symbol of symbols" value="{{symbol}}">{{symbol}}</mat-option>
+        <mat-option *ngFor="let symbol of symbols" value="{{symbol.code}}">{{symbol.code}} - {{symbol.description}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
