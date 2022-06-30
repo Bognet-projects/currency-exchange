@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {SymbolsApiResponseType} from "../types/ApiResponse";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {ConvertApiResponseType, SymbolsApiResponseType} from "../types/ApiResponse";
 import {symbolType} from "../types/symbols";
 import {catchError, map, Observable, of} from "rxjs";
 
@@ -14,12 +14,26 @@ export class ApiService {
   }
 
   getSymbols(): Observable<symbolType[]> {
-    const url: string = `${this.apiUrl}symbol`
+    const url: string = `${this.apiUrl}symbols`
     return this.http.get<SymbolsApiResponseType>(url, {responseType: 'json'}).pipe(
       map((data) => {
         return Object.values(data.symbols)
       }),
       catchError(this.handleError<symbolType[]>([]))
+    )
+  }
+
+  convertCurrency(fromSymbol: string, toSymbol: string, amount: number): Observable<number> {
+    const url: string = `${this.apiUrl}convert`
+    const params: HttpParams = new HttpParams()
+      .set('from', fromSymbol)
+      .set('to', toSymbol)
+      .set('amount', amount)
+
+    return this.http.get<ConvertApiResponseType>(url, {responseType: 'json', params}).pipe(
+      map((data)=>{
+        return data.result
+      })
     )
   }
 

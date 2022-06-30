@@ -6,3 +6,16 @@ export interface SymbolsApiResponseType {
     [key: string]: symbolType
   }
 }
+
+export interface ConvertApiResponseType {
+  success: boolean,
+  query: {
+    from: string,
+    to: string,
+    amount: number
+  },
+  info: {
+    rate: number
+  },
+  result: number
+}
