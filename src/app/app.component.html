@@ -2,7 +2,8 @@
   <mat-card>
     <mat-card-title>{{title}}</mat-card-title>
     <mat-card-content>
-      <app-form></app-form>
+      <app-form (convertResult)="processResult($event)"></app-form>
+      <app-results [result]="convertResults" *ngIf="convertResults"></app-results>
     </mat-card-content>
   </mat-card>
 </main>

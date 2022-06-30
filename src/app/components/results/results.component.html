@@ -1,0 +1,8 @@
+<section>
+  <mat-card-subtitle>Results</mat-card-subtitle>
+  <app-results-item [label]="'Exchange Rate ('+result.base+'/'+result.quote+'):'" [content]="result.rate"></app-results-item>
+  <app-results-item [label]="'Exchange Rate ('+result.quote+'/'+result.base+'):'" [content]="result.reverseRate"></app-results-item>
+  <app-results-item [label]="'Hidden exchange loss:'" [content]="result.hidden"></app-results-item>
+  <hr>
+  <app-results-item [label]="'Convert result:'" [content]="result.amount+' '+result.quote"></app-results-item>
+</section>

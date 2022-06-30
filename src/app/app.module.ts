@@ -13,11 +13,17 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
+import { ResultsComponent } from './components/results/results.component';
+import {MatDividerModule} from "@angular/material/divider";
+import {MatListModule} from "@angular/material/list";
+import { ResultsItemComponent } from './components/results-item/results-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormComponent
+    FormComponent,
+    ResultsComponent,
+    ResultsItemComponent
   ],
   imports: [
     HttpClientModule,
@@ -31,7 +37,9 @@ import {ReactiveFormsModule, FormsModule} from "@angular/forms";
     MatSidenavModule,
     MatButtonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatDividerModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

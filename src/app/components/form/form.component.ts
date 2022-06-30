@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {symbolType} from "../../types/symbols";
 import {ApiService} from "../../services/api.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {convertResult} from "../../types/convert";
 
 @Component({
   selector: 'app-form',
@@ -11,7 +12,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class FormComponent implements OnInit {
   symbols: symbolType[] = []
   convertForm: FormGroup;
-  converted: number;
+  @Output() convertResult = new EventEmitter<convertResult>()
 
   constructor(private apiService: ApiService, private formBuilder: FormBuilder) {
   }
@@ -23,14 +24,14 @@ export class FormComponent implements OnInit {
 
   onSwitch() {
     const temp = this.baseCurrency.value
-    this.convertForm.controls['baseCurrency'].setValue(this.quoteCurrency.value)
-    this.convertForm.controls['quoteCurrency'].setValue(temp)
+    this.baseCurrency.setValue(this.quoteCurrency.value)
+    this.quoteCurrency.setValue(temp)
   }
 
   onConvert() {
     if (this.convertForm.valid) {
       this.apiService.convertCurrency(this.baseCurrency.value, this.quoteCurrency.value, this.amount.value).subscribe((result) => {
-        this.converted = result
+        this.convertResult.emit(result)
       })
     }
   }

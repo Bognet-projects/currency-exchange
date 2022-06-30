@@ -19,3 +19,11 @@ export interface ConvertApiResponseType {
   },
   result: number
 }
+
+export interface RateApiResponseType {
+  success: boolean
+  base: string
+  rates: {
+    [key: string]: number
+  }
+}
