@@ -19,11 +19,10 @@ export class AppComponent {
     this.apiService.getExchangeRate($event.quote, $event.base).subscribe((rate) => {
       this.convertResults = $event
       this.convertResults.reverseRate = rate
-      this.convertResults.hidden = this.calcHidden(rate, $event.rate, $event.amount)
+      this.convertResults.hidden = this.calcHidden(1/rate, $event.rate, $event.amount)
     })
   }
 
-  //TODO: Not correct calculation!
   private calcHidden(rateA: number, rateB: number, amount: number): number{
     return Math.abs(rateA-rateB)*amount
   }

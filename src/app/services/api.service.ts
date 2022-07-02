@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {ConvertApiResponseType, SymbolsApiResponseType} from "../types/ApiResponse";
+import {ConvertApiResponseType, RateApiResponseType, SymbolsApiResponseType} from "../types/ApiResponse";
 import {symbolType} from "../types/symbols";
 import {catchError, map, Observable, of} from "rxjs";
+import {convertResult} from "../types/convert";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,21 @@ export class ApiService {
     )
   }
 
-  convertCurrency(fromSymbol: string, toSymbol: string, amount: number): Observable<number> {
+  getExchangeRate(base: string, quote: string): Observable<number> {
+    const url: string = `${this.apiUrl}latest`
+    const params: HttpParams = new HttpParams()
+      .set('base', base)
+      .set('symbols', quote)
+
+    return this.http.get<RateApiResponseType>(url, {responseType: 'json', params}).pipe(
+      map((data) => {
+        return data.rates[quote]
+      }),
+      catchError(this.handleError<number>(0))
+    )
+  }
+
+  convertCurrency(fromSymbol: string, toSymbol: string, amount: number): Observable<convertResult> {
     const url: string = `${this.apiUrl}convert`
     const params: HttpParams = new HttpParams()
       .set('from', fromSymbol)
@@ -31,8 +46,13 @@ export class ApiService {
       .set('amount', amount)
 
     return this.http.get<ConvertApiResponseType>(url, {responseType: 'json', params}).pipe(
-      map((data)=>{
-        return data.result
+      map((data) => {
+        return {
+          amount: data.result,
+          base: fromSymbol,
+          quote: toSymbol,
+          rate: data.info.rate
+        }
       })
     )
   }

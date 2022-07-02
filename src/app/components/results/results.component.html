@@ -1,8 +1,8 @@
 <section>
   <mat-card-subtitle>Results</mat-card-subtitle>
-  <app-results-item [label]="'Exchange Rate ('+result.base+'/'+result.quote+'):'" [content]="result.rate"></app-results-item>
-  <app-results-item [label]="'Exchange Rate ('+result.quote+'/'+result.base+'):'" [content]="result.reverseRate"></app-results-item>
-  <app-results-item [label]="'Hidden exchange loss:'" [content]="result.hidden"></app-results-item>
+  <app-results-item label="Exchange Rate ({{result.base}}/{{result.quote}}):" content="{{result.rate|number:'1.0-6'}}"></app-results-item>
+  <app-results-item label="Exchange Rate ({{result.quote}}/{{result.base}}):" content="{{result.reverseRate|number:'1.0-6'}}"></app-results-item>
+  <app-results-item label="Hidden exchange loss ({{result.quote}}):" content="{{result.hidden|number: '1.0-6'}}"></app-results-item>
   <hr>
-  <app-results-item [label]="'Convert result:'" [content]="result.amount+' '+result.quote"></app-results-item>
+  <app-results-item label="Convert result:" content="{{result.amount | number: '1.2-4'}} {{result.quote}}"></app-results-item>
 </section>
