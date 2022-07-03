@@ -1,12 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import {MatCardModule} from "@angular/material/card";
-import {FormComponent} from "./components/form/form.component";
-import {ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatIconModule} from "@angular/material/icon";
 import {ApiService} from "./services/api.service";
 import {of} from "rxjs";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -14,11 +11,11 @@ describe('AppComponent', () => {
     apiServiceSpy.getExchangeRate.and.returnValue(of(0))
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent,
-        FormComponent
+        AppComponent
       ],
-      imports:[MatCardModule, ReactiveFormsModule, MatFormFieldModule, MatIconModule],
-      providers: [{provide: ApiService, useValue: apiServiceSpy}]
+      imports:[MatCardModule],
+      providers: [{provide: ApiService, useValue: apiServiceSpy}],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   });
 

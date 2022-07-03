@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResultsComponent } from './results.component';
 import {MatCardModule} from "@angular/material/card";
-import {ResultsItemComponent} from "../results-item/results-item.component";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('ResultsComponent', () => {
   let component: ResultsComponent;
@@ -10,8 +10,9 @@ describe('ResultsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResultsComponent, ResultsItemComponent ],
-      imports: [MatCardModule]
+      declarations: [ ResultsComponent ],
+      imports: [MatCardModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
 
