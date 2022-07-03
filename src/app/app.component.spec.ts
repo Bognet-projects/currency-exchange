@@ -1,12 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {MatCardModule} from "@angular/material/card";
+import {FormComponent} from "./components/form/form.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatIconModule} from "@angular/material/icon";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        FormComponent
       ],
+      imports:[HttpClientTestingModule, MatCardModule, ReactiveFormsModule, MatFormFieldModule, MatIconModule]
     }).compileComponents();
   });
 
@@ -16,16 +24,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'currency-exchange'`, () => {
+  it(`should have as title 'Currency Exchange'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('currency-exchange');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('currency-exchange app is running!');
+    expect(app.title).toEqual('Currency Exchange');
   });
 });
